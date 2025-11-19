@@ -28,7 +28,7 @@ type ServerConfig struct {
 	Static []StaticConfig `yaml:"static"` // <-- Add this
 }
 
-type DBConfig struct {
+/*type DBConfig struct {
 	Type       string `yaml:"type"`
 	Host       string `yaml:"host"`
 	Port       string `yaml:"port"`
@@ -37,7 +37,7 @@ type DBConfig struct {
 	DbName     string `yaml:"dbName"`
 	Migrations string `yaml:"migrations"`
 	Queries    string `yaml:"queries"`
-}
+}*/
 
 type LogConfig struct {
 	ToFile       bool   `yaml:"toFile"`
@@ -49,11 +49,11 @@ type LogConfig struct {
 }
 
 type LiliumConfig struct {
-	Name      string        `yaml:"name"`
-	Server    *ServerConfig `yaml:"server"`
-	Db        *DBConfig     `yaml:"db"`
-	Logger    *LogConfig    `yaml:"logger"`
-	LogRoutes bool          `yaml:"logRoutes"`
+	Name   string        `yaml:"name"`
+	Server *ServerConfig `yaml:"server"`
+	//Db        *DBConfig     `yaml:"db"`
+	Logger    *LogConfig `yaml:"logger"`
+	LogRoutes bool       `yaml:"logRoutes"`
 }
 
 func Load(path string) (*LiliumConfig, error) {
