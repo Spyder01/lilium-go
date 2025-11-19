@@ -1,0 +1,134 @@
+{"level":"info","time":"2025-11-19T14:52:13+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:52:13+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:52:13+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:52:13+05:30","message":"Listening on :%!s(uint=8080)"}
+{"level":"info","time":"2025-11-19T14:53:21+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:53:21+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:53:21+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:53:21+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:53:52+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:53:52+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:54:11+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:54:11+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:54:11+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:54:11+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:54:13+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:54:13+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:56:15+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:56:15+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:56:15+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:56:15+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:56:16+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:56:16+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:56:42+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:56:42+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:56:42+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:56:42+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:56:43+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:56:43+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:56:45+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:56:45+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:56:45+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:56:45+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:56:46+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:56:46+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:57:54+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:57:54+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:57:54+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:57:54+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:57:55+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:57:55+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T14:57:57+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T15:58:48+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T15:58:48+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T15:58:48+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T15:58:48+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T15:58:51+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T15:58:51+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:01:20+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:02:13+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:02:13+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:02:17+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:03:16+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:03:16+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:03:19+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:13:14+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:13:14+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:13:19+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:13:57+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:13:57+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:14:13+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:14:15+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:14:15+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:14:16+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:14:17+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:14:17+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:14:18+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"/"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"/assets"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:16:34+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:51:32+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:51:32+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"HEllo, World!!"}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-11-19T16:52:06+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-11-19T16:52:06+05:30","message":"Running onStop tasks..."}
