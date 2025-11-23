@@ -1,10 +1,10 @@
 package core
 
 import (
-	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"net/http"
+	"strings"
 )
 
 type Router struct {
@@ -104,21 +104,37 @@ func (r *Router) SubRouter(prefix string) *Router {
 	}
 }
 
-func (r *Router) Static(route string, dir string) {
+func (r *Router) Static(route, dir string) {
+	// normalize
 	if route == "" {
 		route = "/"
 	}
-
-	// chi requires wildcard for static directories
-	pattern := route
-	if pattern == "/" {
-		pattern = "/*"
-	} else {
-		pattern = fmt.Sprintf("%s/*", route)
+	if !strings.HasPrefix(route, "/") {
+		route = "/" + route
+	}
+	// root special-case
+	if route == "/" {
+		// Serve directory at root: requests like "/" and "/foo" should work.
+		fs := http.FileServer(http.Dir(dir))
+		r.mux.Handle("/*", fs)
+		return
 	}
 
-	// File server
-	fs := http.StripPrefix(route, http.FileServer(http.Dir(dir)))
+	// ensure route doesn't end with slash (we'll add handlers for both)
+	route = strings.TrimSuffix(route, "/")
 
+	// 1) redirect bare `/static` -> `/static/`
+	r.mux.HandleFunc(route, func(w http.ResponseWriter, req *http.Request) {
+		// preserve query string if any
+		target := route + "/"
+		if req.URL.RawQuery != "" {
+			target += "?" + req.URL.RawQuery
+		}
+		http.Redirect(w, req, target, http.StatusMovedPermanently)
+	})
+
+	// 2) serve files for `/static/*`
+	pattern := route + "/*"                                           // e.g. /static/*
+	fs := http.StripPrefix(route+"/", http.FileServer(http.Dir(dir))) // strip "/static/"
 	r.mux.Handle(pattern, fs)
 }

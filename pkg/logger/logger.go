@@ -60,6 +60,10 @@ type Logger struct {
 }
 
 func NewLogger(cfg *config.LogConfig) (*Logger, error) {
+	if cfg == nil {
+		cfg = &config.LogConfig{}
+	}
+
 	var writers []io.Writer
 
 	if cfg.ToStdout {

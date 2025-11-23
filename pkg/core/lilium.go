@@ -83,6 +83,8 @@ func (app *Lilium) OnStop(task LiliumTask) {
 
 func (app *Lilium) Start(router *Router) {
 	app.processCors(router.mux)
+	if app.Config.LogRoutes {
+	}
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", app.Config.Server.Port),
