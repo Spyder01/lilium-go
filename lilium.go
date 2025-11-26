@@ -16,7 +16,7 @@ type AppContext core.Context
 
 type RequestContext core.RequestContext
 
-type LiliuTask core.LiliumTask
+type LiliumTask core.LiliumTask
 
 func LoadConfig(path string) *config.LiliumConfig {
 	return core.LoadLiliumConfig(path)
