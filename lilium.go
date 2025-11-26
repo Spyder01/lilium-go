@@ -1,6 +1,8 @@
 package lilium
 
 import (
+	"context"
+
 	"github.com/spyder01/lilium-go/pkg/config"
 	"github.com/spyder01/lilium-go/pkg/core"
 	"github.com/spyder01/lilium-go/pkg/module"
@@ -18,8 +20,8 @@ func LoadConfig(path string) *config.LiliumConfig {
 	return core.LoadLiliumConfig(path)
 }
 
-func New(config *config.LiliumConfig) *core.Lilium {
-	return core.New(config)
+func New(config *config.LiliumConfig, ctx_ context.Context) *core.Lilium {
+	return core.New(config, ctx_)
 }
 
 func NewRouter(app *core.Context) *core.Router {

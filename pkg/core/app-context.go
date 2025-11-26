@@ -1,6 +1,7 @@
 package core
 
 import (
+	"context"
 	"sync"
 
 	"github.com/spyder01/lilium-go/pkg/logger"
@@ -13,6 +14,7 @@ type Context struct {
 	isRunning bool
 	Logger    *logger.Logger
 	app       *Lilium
+	ctx       context.Context
 }
 
 func (ctx *Context) Set(key string, val any) {

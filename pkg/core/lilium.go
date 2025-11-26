@@ -24,7 +24,7 @@ type Lilium struct {
 	isRunning    bool
 }
 
-func New(cfg *config.LiliumConfig) *Lilium {
+func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 	log, err := logger.NewLogger(cfg.Logger)
 	if err != nil {
 		panic("Unable to instantiate logger")
@@ -46,6 +46,7 @@ func New(cfg *config.LiliumConfig) *Lilium {
 		isRunning: false,
 		mu:        sync.RWMutex{},
 		Logger:    log,
+		ctx:       ctx_,
 	}
 
 	app.Context = ctx
