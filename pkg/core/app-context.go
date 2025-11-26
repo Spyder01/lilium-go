@@ -11,6 +11,7 @@ type Context struct {
 	mu        sync.RWMutex
 	Bus       *EventBus
 	isRunning bool
+	Logger    *logger.Logger
 	app       *Lilium
 }
 
