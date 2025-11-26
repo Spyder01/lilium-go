@@ -19,3 +19,5 @@ func NewRouter(app *core.Context) *core.Router {
 }
 
 type LiliumModule module.Module
+
+type LiliumModulePriority module.Module
