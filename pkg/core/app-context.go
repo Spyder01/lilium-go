@@ -14,7 +14,7 @@ type Context struct {
 	isRunning bool
 	Logger    *logger.Logger
 	app       *Lilium
-	ctx       context.Context
+	Ctx       context.Context
 }
 
 func (ctx *Context) Set(key string, val any) {

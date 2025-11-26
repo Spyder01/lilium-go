@@ -46,7 +46,7 @@ func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 		isRunning: false,
 		mu:        sync.RWMutex{},
 		Logger:    log,
-		ctx:       ctx_,
+		Ctx:       ctx_,
 	}
 
 	app.Context = ctx
