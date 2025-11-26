@@ -16,7 +16,7 @@ type AppContext core.Context
 
 type RequestContext core.RequestContext
 
-type LiliumTask func(conext *core.Context) error
+type LiliumTask func(context *AppContext) error
 
 func LoadConfig(path string) *config.LiliumConfig {
 	return core.LoadLiliumConfig(path)
