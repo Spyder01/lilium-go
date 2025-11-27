@@ -5,12 +5,9 @@ import (
 
 	"github.com/spyder01/lilium-go/pkg/config"
 	"github.com/spyder01/lilium-go/pkg/core"
-	"github.com/spyder01/lilium-go/pkg/module"
 )
 
-type LiliumModule module.Module
-
-type LiliumModulePriority module.Module
+type LiliumModule core.Module
 
 type AppContext core.Context
 

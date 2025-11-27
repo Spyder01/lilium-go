@@ -15,13 +15,14 @@ import (
 )
 
 type Lilium struct {
-	Config       *config.LiliumConfig
-	onStartTasks []LiliumTask
-	onStopTasks  []LiliumTask
-	Lock         *sync.Mutex
-	Logger       *logger.Logger
-	Context      *Context
-	isRunning    bool
+	Config        *config.LiliumConfig
+	onStartTasks  []LiliumTask
+	onStopTasks   []LiliumTask
+	Lock          *sync.Mutex
+	Logger        *logger.Logger
+	Context       *Context
+	isRunning     bool
+	moduleManager *ModuleManager
 }
 
 func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
@@ -50,6 +51,7 @@ func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 	}
 
 	app.Context = ctx
+	app.moduleManager = NewModuleManager(ctx)
 
 	return app
 }
@@ -84,6 +86,12 @@ func (app *Lilium) OnStop(task LiliumTask) {
 }
 
 func (app *Lilium) Start(router *Router) {
+	err := app.moduleManager.InitAll()
+	if err != nil {
+		app.Logger.Errorf("Error while Initializing modules: %v", err)
+		panic(err)
+	}
+
 	app.processCors(router.mux)
 	if app.Config.LogRoutes {
 	}
@@ -98,6 +106,15 @@ func (app *Lilium) Start(router *Router) {
 		router.Static(s.Route, s.Directory)
 	}
 	app.Logger.Info("Mounted static files")
+
+	// Start Modules
+	app.Logger.Info("Starting all the modules...")
+	err = app.moduleManager.StartAll()
+	if err != nil {
+		app.Logger.Errorf("Error while starting attached modules: %v", err)
+		panic(err)
+	}
+	app.Logger.Info("Started all the attached modules...")
 
 	// Run onStart tasks
 	app.Logger.Info("Running onStart tasks...")
@@ -141,8 +158,16 @@ func (app *Lilium) Start(router *Router) {
 		}
 	}
 
+	app.Logger.Info("Stopping all the attached modules...")
+	app.moduleManager.ShutdownAll()
+	app.Logger.Info("Stopped all the attached modules...")
+
 	// Close logger
 	_ = app.Logger.Close()
 
 	app.Logger.Info("Lilium shutdown complete.")
+}
+
+func (app *Lilium) UseModule(m Module) {
+	app.moduleManager.Register(m)
 }
