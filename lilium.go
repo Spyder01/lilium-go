@@ -7,13 +7,12 @@ import (
 	"github.com/spyder01/lilium-go/pkg/core"
 )
 
-type LiliumModule core.Module
-
-type AppContext core.Context
-
-type RequestContext core.RequestContext
-
-type LiliumTask func(context *AppContext) error
+type (
+	LiliumModule   = core.Module
+	AppContext     = core.Context
+	RequestContext = core.RequestContext
+	LiliumTask     = core.LiliumTask
+)
 
 func LoadConfig(path string) *config.LiliumConfig {
 	return core.LoadLiliumConfig(path)
