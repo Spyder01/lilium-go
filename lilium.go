@@ -12,6 +12,7 @@ type (
 	AppContext     = core.Context
 	RequestContext = core.RequestContext
 	LiliumTask     = func(ctx *AppContext) error
+	Lilium         = core.Lilium
 )
 
 func LoadConfig(path string) *config.LiliumConfig {
