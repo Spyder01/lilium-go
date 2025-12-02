@@ -1,8 +1,11 @@
 package core
 
 import (
+	"fmt"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
+	"github.com/joho/godotenv"
 )
 
 func (app *Lilium) processCors(r chi.Router) {
@@ -25,6 +28,18 @@ func (app *Lilium) processCors(r chi.Router) {
 func (app *Lilium) processApp() {
 	if !app.Config.LogRoutes {
 		return
+	}
+}
+
+func (app *Lilium) processEnv() {
+	envCfg := app.Config.Env
+	if envCfg == nil || !envCfg.EnableFile {
+		return
+	}
+
+	err := godotenv.Load(envCfg.FilePath)
+	if err != nil {
+		panic(fmt.Sprintf("Error loading .env file: %v", err))
 	}
 }
 

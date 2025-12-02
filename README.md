@@ -1,125 +1,215 @@
 # 🌸 **Lilium — A Fast, Elegant & Modular Web Framework for Go**
 
-Lilium is a lightweight, flexible, developer-friendly web framework for Go, built around clarity, modularity, and performance.
+Lilium is a lightweight and high-performance web framework for Go — built around clarity, modularity, and developer experience.
 
 It brings together:
 
 * ⚡ **Chi-powered high-performance router**
-* 🧩 **Modular Application Container + Dependency Injection**
-* 📄 **Simple YAML Configuration**
-* 🧵 **Asynchronous Zerolog-based Logging**
+* 🧩 **Modular App Container + Dependency Injection**
+* 📄 **Smart YAML Configuration with ENV expansion**
+* 🌱 **Automatic Defaults for common fields**
+* 🧩 **Extensible config via Extras (for plugins/modules)**
+* 🧵 **Asynchronous Zerolog logging**
 * 🔔 **Built-in EventBus (pub/sub)**
 * 🗂️ **Static File Serving**
-* 🛡️ **Composable Middleware System**
+* 🛡️ **Composable Middleware**
 * 🧹 **Graceful Shutdown & Lifecycle Hooks**
 * 🧪 **First-class Testability**
 
-Lilium aims to stay as close as possible to idiomatic Go while providing a clean, modern developer experience.
+Designed to stay idiomatic to Go while providing a clean, modern developer experience.
 
 ---
 
 # 🚀 Features
 
-## 🚦 **Router**
+## 🚦 Router
 
-A zero-friction wrapper around Chi:
+A frictionless wrapper around Chi:
 
-* Route groups & nesting
-* Middleware chaining
-* Centralized error handling
+* Grouped & nested routes
 * Typed `RequestContext`
-* Built-in helpers (`JSON`, `HTML`, `Text`, `Param`…)
+* Middleware chaining
+* Helpers for JSON / Text / HTML responses
+* Centralized error handling
 * Optional automatic route logging
-* Fully testable
+
+Example:
+
+```go
+router.GET("/hello/{name}", func(c *core.RequestContext) error {
+    return c.JSON(200, map[string]string{
+        "message": "Hello " + c.Param("name"),
+    })
+})
+```
 
 ---
 
-## 🌐 **Static File Serving**
+## 🌐 Static File Serving
 
-Declare static directories directly in your config:
+Declare static directories directly in config:
 
 ```yaml
 server:
   static:
     - route: "/"
       directory: "./public"
-    - route: "/assets"
-      directory: "./assets"
 ```
 
 Automatically mounted at startup.
 
 ---
 
-## ⚙️ **Config System (YAML)**
+# ⚙️ Smart Config System (YAML)
 
-Load a strongly typed config:
+Load config with one line:
 
 ```go
 cfg := config.Load("lilium.yaml")
 ```
 
-Supports:
+### ✨ Includes:
 
-* Server settings
-* CORS
-* Static files
-* Logging
-* App metadata
-
-Detailed structure below.
+| Feature                              | Status |
+| ------------------------------------ | :----: |
+| Environment variable expansion       |    ✔   |
+| Fallback default values              |    ✔   |
+| Unknown fields preserved for modules |    ✔   |
+| Strongly typed configuration         |    ✔   |
 
 ---
 
-## 🧵 **Asynchronous Logging**
+## 🔄 Environment Variable Expansion
 
-Based on **Zerolog**, non-blocking, and configurable via YAML:
+Supports `${VAR}` and `${VAR:default}`:
 
-* File + STDOUT support
+```yaml
+server:
+  port: ${PORT:8080}
+```
+
+| Scenario       | Result         |
+| -------------- | -------------- |
+| `PORT` exists  | use PORT value |
+| `PORT` missing | use `8080`     |
+
+---
+
+## 🧠 Sane Defaults (Auto-Applied)
+
+If omitted:
+
+| Field                            | Default           |
+| -------------------------------- | ----------------- |
+| `name`                           | `"Lilium"`        |
+| `server.port`                    | `8080`            |
+| `server.cors.maxAge`             | `600` seconds     |
+| Logger output                    | `toStdout = true` |
+| Logger prefix                    | `"[Lilium] "`     |
+| `env.enableFile`                 | `false`           |
+| If `.env` enabled filePath empty | `.env`            |
+
+This means you can start with only:
+
+```yaml
+server:
+  port: 9000
+```
+
+→ Completely valid 🚀
+
+---
+
+## 🧩 Extensible Config (Extras)
+
+Unknown YAML fields are stored in:
+
+```go
+cfg.Extras map[string]any
+```
+
+Used for modules:
+
+```yaml
+auth:
+  provider: google
+  tokenTTL: 3600
+```
+
+Module usage:
+
+```go
+type AuthConfig struct {
+    Provider string `yaml:"provider"`
+    TokenTTL int    `yaml:"tokenTTL"`
+}
+
+var auth AuthConfig
+_ = cfg.GetExtra("auth", &auth)
+```
+
+This enables plugin systems and forward-compatible configuration.
+
+---
+
+# 🧵 Logging (Zerolog-based)
+
+* Async writes
+* File + STDOUT targets
 * Debug mode
-* Prefix + flags
-* Buffered writes
-* Flush on shutdown
+* Auto-flush on shutdown
+
+```yaml
+logger:
+  toStdout: true
+  prefix: "[MyApp] "
+  debugEnabled: true
+```
 
 ---
 
-## 📡 **EventBus**
+# 📡 EventBus
 
-A simple, fast, in-process pub/sub system:
+Simple in-process pub/sub:
 
-* Per-topic buffered channels
-* Non-blocking publish
-* Safe graceful close
-* Perfect for background tasks and modular packages
+```go
+id, ch, _ := app.Context.Bus.Subscribe("notifications", 10)
+
+go func() {
+    for msg := range ch {
+        fmt.Println("received:", msg)
+    }
+}()
+
+app.Context.Bus.Publish("notifications", "hello world")
+```
+
+Perfect for background processing and modular integrations.
 
 ---
 
-## 🧩 **Dependency Injection / App Context**
+# 🧩 Dependency Injection / App Context
 
-Lilium provides a global DI container:
+Lightweight DI for shared dependencies:
 
 ```go
 app.Context.Provide("db", db)
 db := app.Context.MustGet("db").(*sql.DB)
 ```
 
-Plus a **per-request context** giving:
-
-* Path/URL params
-* Query params
-* Body helpers
-* Logging hooks
-* Shared app dependencies
+Per-request context includes logging + utilities.
 
 ---
 
-## 🧹 **Graceful Shutdown**
+# 🧹 Graceful Shutdown
 
-* Handles `SIGINT`, `SIGTERM`
-* Drains in-flight requests
-* Flushes logs
-* Runs `OnStart` and `OnStop` tasks
-* Shuts down EventBus cleanly
+On termination:
+
+* Stop HTTP server cleanly
+* Drain in-flight requests
+* Flush logs
+* Close EventBus
+* Trigger module lifecycle hooks
 
 ---
 
@@ -131,52 +221,15 @@ go get github.com/spyder01/lilium-go@latest
 
 ---
 
-# 🚀 Quick Start
+# 🏃 Quick Start
 
-### 1. Load configuration
-
-```go
-cfg := config.Load("lilium.yaml")
-```
-
-### 2. Initialize the application
-
-```go
-app := core.New(cfg)
-```
-
-### 3. Create a router
-
-```go
-router := core.NewRouter(app.Context)
-```
-
-### 4. Define routes
-
-```go
-router.GET("/hello/{name}", func(c *core.RequestContext) error {
-    return c.JSON(200, map[string]string{
-        "message": "Hello " + c.Param("name"),
-    })
-})
-```
-
-### 5. Start server
-
-```go
-app.Start(router)
-```
-
----
-
-# 📁 Example Project Structure
+### Project Structure
 
 ```
 .
 ├── lilium.yaml
 ├── main.go
 └── public/
-    └── index.html
 ```
 
 **main.go**
@@ -204,116 +257,12 @@ func main() {
 
 ---
 
-# ⚙️ Configuration Reference
-
-Below is the full YAML structure Lilium supports.
-
-### **`LiliumConfig`**
-
-```yaml
-name: "MyApp"
-
-server:
-  port: 8080
-
-  cors:
-    enabled: true
-    origins: ["*"]
-    allowedMetods: ["GET", "POST"]
-    allowedHeaders: ["Content-Type"]
-    exposedHeaders: []
-    allowCredentials: true
-    maxAge: 3600
-
-  static:
-    - route: "/"
-      directory: "./public"
-
-logger:
-  toFile: true
-  filePath: "./logs/app.log"
-  toStdout: true
-  prefix: ""
-  flags: 0
-  debugEnabled: true
-
-logRoutes: true
-```
-
----
-
-# 🔧 Config Structures
-
-### `ServerConfig`
-
-```go
-type ServerConfig struct {
-    Port   uint           `yaml:"port"`
-    Cors   *CorsConfig    `yaml:"cors"`
-    Static []StaticConfig `yaml:"static"`
-}
-```
-
-### `CorsConfig`
-
-```go
-type CorsConfig struct {
-    Enabled          bool     `yaml:"enabled"`
-    Origins          []string `yaml:"origins"`
-    AllowedMetods    []string `yaml:"allowedMetods"`
-    AllowedHeaders   []string `yaml:"allowedHeaders"`
-    ExposedHeaders   []string `yaml:"exposedHeaders"`
-    AllowCredentials bool     `yaml:"allowCredentials"`
-    MaxAge           uint     `yaml:"maxAge"`
-}
-```
-
-### `StaticConfig`
-
-```go
-type StaticConfig struct {
-    Route     string `yaml:"route"`
-    Directory string `yaml:"directory"`
-}
-```
-
-### `LogConfig`
-
-```go
-type LogConfig struct {
-    ToFile       bool   `yaml:"toFile"`
-    FilePath     string `yaml:"filePath"`
-    ToStdout     bool   `yaml:"toStdout"`
-    Prefix       string `yaml:"prefix"`
-    Flags        int    `yaml:"flags"`
-    DebugEnabled bool   `yaml:"debugEnabled"`
-}
-```
-
----
-
-# 🔔 EventBus Example
-
-```go
-id, ch, _ := app.Context.Bus.Subscribe("notifications", 10)
-
-go func() {
-    for msg := range ch {
-        fmt.Println("received:", msg)
-    }
-}()
-
-app.Context.Bus.Publish("notifications", "hello world")
-```
-
----
-
 # 🧪 Testing
 
-`RequestContext`, router, and logger are fully testable.
+All router + RequestContext behavior is testable:
 
 ```go
-req := httptest.NewRequest("GET", "/hello/world", nil)
+req := httptest.NewRequest("GET", "/ping", nil)
 rec := httptest.NewRecorder()
 
 router.ServeHTTP(rec, req)
@@ -323,25 +272,28 @@ assert.Equal(t, 200, rec.Code)
 
 ---
 
-# 🛣️ Roadmap
+# 🗺️ Roadmap
 
-* [ ] Authentication (JWT, sessions)
+* [x] ENV var expansion in config
+* [x] Unknown field `Extras` for modules
+* [ ] Authentication (sessions + JWT)
 * [ ] Built-in validators
-* [ ] More middleware (rate-limiting, CSRF, caching)
 * [ ] WebSockets
-* [ ] CLI tool (`lilium new`, `lilium migrate`)
+* [ ] Rate-limiting & caching middleware
 * [ ] Auto OpenAPI generation
-* [ ] Generic DI improvements
+* [ ] CLI tooling (`lilium new`, scaffolding)
+* [ ] Stronger DI capabilities
 
 ---
 
 # ❤️ Contributing
 
 PRs welcome!
-Please open an issue for features, bugs, or proposals.
+Open an issue for ideas or bugs.
 
 ---
 
 # 📄 License
 
-MIT License.
+MIT © 2025
+
