@@ -37,6 +37,10 @@ func processEnv(envCfg *config.EnvironmentConfig) {
 		return
 	}
 
+	if envCfg.FilePath == "" {
+		envCfg.FilePath = ".env"
+	}
+
 	err := godotenv.Load(envCfg.FilePath)
 	if err != nil {
 		panic(fmt.Sprintf("Error loading .env file: %v", err))
