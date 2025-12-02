@@ -59,6 +59,10 @@ func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 const DEFUALT_LILIUM_CONFIG = "lilium.yaml"
 
 func LoadLiliumConfig(path string) *config.LiliumConfig {
+	envCfg, _ := config.LoadEnv(path)
+	if envCfg != nil {
+		processEnv(envCfg)
+	}
 	cfg, err := config.Load(path)
 	if err != nil {
 		panic(fmt.Sprintf("Error while reading the lilium config at %s: %v\n", path, err))

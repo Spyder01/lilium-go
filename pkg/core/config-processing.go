@@ -6,6 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
+	"github.com/spyder01/lilium-go/pkg/config"
 )
 
 func (app *Lilium) processCors(r chi.Router) {
@@ -31,8 +32,7 @@ func (app *Lilium) processApp() {
 	}
 }
 
-func (app *Lilium) processEnv() {
-	envCfg := app.Config.Env
+func processEnv(envCfg *config.EnvironmentConfig) {
 	if envCfg == nil || !envCfg.EnableFile {
 		return
 	}

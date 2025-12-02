@@ -43,6 +43,20 @@ type EnvironmentConfig struct {
 	FilePath   string `yaml:"filePath"`
 }
 
+func LoadEnv(path string) (*EnvironmentConfig, error) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	cfg := &EnvironmentConfig{}
+	if err := yaml.Unmarshal([]byte(data), cfg); err != nil {
+		return nil, fmt.Errorf("failed to parse YAML: %w", err)
+	}
+
+	return cfg, nil
+}
+
 type LiliumConfig struct {
 	Name      string             `yaml:"name"`
 	Server    *ServerConfig      `yaml:"server"`
