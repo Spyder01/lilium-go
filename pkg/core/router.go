@@ -1,10 +1,11 @@
 package core
 
 import (
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
 	"net/http"
 	"strings"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 type Router struct {
@@ -112,29 +113,28 @@ func (r *Router) Static(route, dir string) {
 	if !strings.HasPrefix(route, "/") {
 		route = "/" + route
 	}
-	// root special-case
+
+	// file server handler
+	fs := http.FileServer(http.Dir(dir))
+
+	// special-case: root
 	if route == "/" {
-		// Serve directory at root: requests like "/" and "/foo" should work.
-		fs := http.FileServer(http.Dir(dir))
-		r.mux.Handle("/*", fs)
+		// Serve everything and strip leading slash
+		r.mux.Handle("/*", http.StripPrefix("/", fs))
 		return
 	}
 
-	// ensure route doesn't end with slash (we'll add handlers for both)
-	route = strings.TrimSuffix(route, "/")
+	// Ensure trailing slash _redirect_ if user hits route exactly
+	// e.g. "/static" -> "/static/"
+	if route[len(route)-1] != '/' {
+		r.mux.Get(route, func(w http.ResponseWriter, r *http.Request) {
+			http.Redirect(w, r, route+"/", http.StatusMovedPermanently)
+		})
+	}
 
-	// 1) redirect bare `/static` -> `/static/`
-	r.mux.HandleFunc(route, func(w http.ResponseWriter, req *http.Request) {
-		// preserve query string if any
-		target := route + "/"
-		if req.URL.RawQuery != "" {
-			target += "?" + req.URL.RawQuery
-		}
-		http.Redirect(w, req, target, http.StatusMovedPermanently)
-	})
+	// Serve static files under route/*
+	pattern := route + "/*"
+	fileHandler := http.StripPrefix(route+"/", fs)
 
-	// 2) serve files for `/static/*`
-	pattern := route + "/*"                                           // e.g. /static/*
-	fs := http.StripPrefix(route+"/", http.FileServer(http.Dir(dir))) // strip "/static/"
-	r.mux.Handle(pattern, fs)
+	r.mux.Handle(pattern, fileHandler)
 }

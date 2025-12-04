@@ -132,3 +132,80 @@
 {"level":"info","time":"2025-11-19T16:51:34+05:30","message":"Listening on :8080"}
 {"level":"info","time":"2025-11-19T16:52:06+05:30","message":"Shutting down server..."}
 {"level":"info","time":"2025-11-19T16:52:06+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:58:15+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-12-04T11:58:31+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-12-04T11:59:01+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-12-04T11:59:01+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T11:59:01+05:30","message":"Stopping all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:01+05:30","message":"Shutting down modules..."}
+{"level":"info","time":"2025-12-04T11:59:01+05:30","message":"Stopped all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-12-04T11:59:02+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-12-04T11:59:15+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-12-04T11:59:15+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T11:59:15+05:30","message":"Stopping all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:15+05:30","message":"Shutting down modules..."}
+{"level":"info","time":"2025-12-04T11:59:15+05:30","message":"Stopped all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-12-04T11:59:21+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-12-04T12:03:00+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-12-04T12:03:00+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T12:03:00+05:30","message":"Stopping all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:03:00+05:30","message":"Shutting down modules..."}
+{"level":"info","time":"2025-12-04T12:03:00+05:30","message":"Stopped all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-12-04T12:03:18+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-12-04T12:04:02+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-12-04T12:04:02+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T12:04:02+05:30","message":"Stopping all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:04:02+05:30","message":"Shutting down modules..."}
+{"level":"info","time":"2025-12-04T12:04:02+05:30","message":"Stopped all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Initializing modules..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Mounting static files"}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Mounted static files"}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Starting all the modules..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Starting modules..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Started all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Running onStart tasks..."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Startup tasks complete."}
+{"level":"info","time":"2025-12-04T12:04:03+05:30","message":"Listening on :8080"}
+{"level":"info","time":"2025-12-04T12:04:16+05:30","message":"Shutting down server..."}
+{"level":"info","time":"2025-12-04T12:04:16+05:30","message":"Running onStop tasks..."}
+{"level":"info","time":"2025-12-04T12:04:16+05:30","message":"Stopping all the attached modules..."}
+{"level":"info","time":"2025-12-04T12:04:16+05:30","message":"Shutting down modules..."}
+{"level":"info","time":"2025-12-04T12:04:16+05:30","message":"Stopped all the attached modules..."}
