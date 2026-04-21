@@ -18,18 +18,12 @@ func (app *Lilium) processCors(r chi.Router) {
 
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   corsCfg.Origins,
-		AllowedMethods:   corsCfg.AllowedMetods,
+		AllowedMethods:   corsCfg.AllowedMethods,
 		AllowedHeaders:   corsCfg.AllowedHeaders,
 		MaxAge:           int(corsCfg.MaxAge),
 		ExposedHeaders:   corsCfg.ExposedHeaders,
 		AllowCredentials: corsCfg.AllowCredentials,
 	}))
-}
-
-func (app *Lilium) processApp() {
-	if !app.Config.LogRoutes {
-		return
-	}
 }
 
 func processEnv(envCfg *config.EnvironmentConfig) {

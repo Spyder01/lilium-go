@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"sync/atomic"
-	"time"
 )
 
 var (
@@ -47,7 +46,7 @@ type EventBus struct {
 	// to create/get brokers (fast path avoids locking). For simplicity we use a small sync.Map-like atomic pointer.
 	topics atomic.Pointer[map[string]*topicBroker] // pointer to map snapshot
 	closed atomic.Bool
-	idSeq  uint64
+	idSeq  atomic.Uint64
 }
 
 // NewEventBus initializes an empty bus.
@@ -59,7 +58,7 @@ func NewEventBus() *EventBus {
 }
 
 func (eb *EventBus) nextID() uint64 {
-	return atomic.AddUint64(&eb.idSeq, 1)
+	return eb.idSeq.Add(1)
 }
 
 // getOrCreateBroker returns existing broker or creates and starts one.
@@ -88,10 +87,10 @@ func (eb *EventBus) getOrCreateBroker(topic string) (*topicBroker, error) {
 		for k, v := range oldMap {
 			newMap[k] = v
 		}
-		// create broker
+		// create broker — buffered unsubscribe so callers never block
 		broker := &topicBroker{
 			subscribe:   make(chan subscribeReq),
-			unsubscribe: make(chan unsubscribeReq),
+			unsubscribe: make(chan unsubscribeReq, 64),
 			publish:     make(chan publishReq, 256), // per-topic publish buffer
 			close:       make(chan struct{}),
 		}
@@ -100,7 +99,7 @@ func (eb *EventBus) getOrCreateBroker(topic string) (*topicBroker, error) {
 		// attempt to swap pointer
 		if eb.topics.CompareAndSwap(oldPtr, &newMap) {
 			// start broker goroutine
-			go runBroker(topic, broker)
+			go runBroker(topic, broker, eb.nextID)
 			return broker, nil
 		}
 		// else: retry (someone else changed map)
@@ -132,12 +131,7 @@ func (eb *EventBus) Subscribe(topic string, buf int) (uint64, <-chan interface{}
 func (eb *EventBus) Unsubscribe(topic string, id uint64) {
 	mp := eb.topics.Load()
 	if b, ok := (*mp)[topic]; ok {
-		select {
-		case b.unsubscribe <- unsubscribeReq{id: id}:
-		default:
-			// If unsubscribe channel is full (shouldn't be), do non-blocking send as fallback
-			go func() { b.unsubscribe <- unsubscribeReq{id: id} }()
-		}
+		b.unsubscribe <- unsubscribeReq{id: id}
 	}
 }
 
@@ -184,23 +178,16 @@ func (eb *EventBus) Close() {
 }
 
 // broker goroutine
-func runBroker(topic string, b *topicBroker) {
+func runBroker(topic string, b *topicBroker, nextID func() uint64) {
 	// subscribers map id -> channel
 	subs := make(map[uint64]chan interface{})
 	for {
 		select {
 		case req := <-b.subscribe:
-			// generate id using time-based value (keeps broker-local uniqueness)
-			id := uint64(time.Now().UnixNano()) ^ uint64(len(subs)+1)
+			id := nextID()
 			ch := make(chan interface{}, req.buf)
 			unsubOnce := func() {
-				// send unsubscribe request back to this broker
-				select {
-				case b.unsubscribe <- unsubscribeReq{id: id}:
-				default:
-					// fallback: spawn a goroutine so we don't block
-					go func() { b.unsubscribe <- unsubscribeReq{id: id} }()
-				}
+				b.unsubscribe <- unsubscribeReq{id: id}
 			}
 			resp := subscribeResp{
 				id:          id,

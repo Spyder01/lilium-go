@@ -219,11 +219,11 @@ func TestFormPostForm(t *testing.T) {
 	rr := httptest.NewRecorder()
 	ctx := NewRequestContext(&Context{store: make(map[string]any)}, rr, req)
 
-	if ctx.Form("x") != "10" {
-		t.Fatalf("expected Form x=10")
+	if v, err := ctx.Form("x"); err != nil || v != "10" {
+		t.Fatalf("expected Form x=10, got %q err=%v", v, err)
 	}
-	if ctx.PostForm("y") != "20" {
-		t.Fatalf("expected PostForm y=20")
+	if v, err := ctx.PostForm("y"); err != nil || v != "20" {
+		t.Fatalf("expected PostForm y=20, got %q err=%v", v, err)
 	}
 
 	// ensure only parsed once
