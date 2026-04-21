@@ -1,12 +1,15 @@
 package core
 
 import (
+	"context"
 	"net/http"
 	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
+
+type requestContextKey struct{}
 
 type Router struct {
 	mux *chi.Mux
@@ -26,7 +29,13 @@ func NewRouter(app *Context) *Router {
 
 func (r *Router) adapt(h HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		ctx := NewRequestContext(r.app, w, req)
+		// Reuse RequestContext threaded through by middleware, if present.
+		var ctx *RequestContext
+		if rc, ok := req.Context().Value(requestContextKey{}).(*RequestContext); ok {
+			ctx = rc
+		} else {
+			ctx = NewRequestContext(r.app, w, req)
+		}
 
 		// extract chi params
 		for _, key := range chi.RouteContext(req.Context()).URLParams.Keys {
@@ -73,15 +82,18 @@ func (r *Router) Group(fn func(g *Router)) {
 
 func (r *Router) Use(mws ...Middleware) {
 	for _, mw := range mws {
+		mw := mw
 		r.mux.Use(func(next http.Handler) http.Handler {
 			return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
-				h := mw(func(ctx *RequestContext) error {
-					next.ServeHTTP(w, req)
+				rc := NewRequestContext(r.app, w, req)
+				h := mw(func(rc *RequestContext) error {
+					// Thread the same RequestContext to downstream handlers/middleware.
+					next.ServeHTTP(w, req.WithContext(
+						context.WithValue(req.Context(), requestContextKey{}, rc),
+					))
 					return nil
 				})
-
-				ctx := NewRequestContext(r.app, w, req)
-				_ = h(ctx)
+				_ = h(rc)
 			})
 		})
 	}

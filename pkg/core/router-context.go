@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -116,6 +117,9 @@ func (c *RequestContext) HTML(status int, html string) error {
 }
 
 func (c *RequestContext) File(path string) error {
+	if _, err := os.Stat(path); err != nil {
+		return err
+	}
 	http.ServeFile(c.Res, c.Req, path)
 	return nil
 }
@@ -146,19 +150,26 @@ func (c *RequestContext) Err() error {
 	return c.Req.Context().Err()
 }
 
-func (c *RequestContext) ensureFormParsed() {
+func (c *RequestContext) ensureFormParsed() error {
 	if !c.formParsed {
-		c.Req.ParseForm() // parses both Form + PostForm + Multipart
+		if err := c.Req.ParseForm(); err != nil {
+			return err
+		}
 		c.formParsed = true
 	}
+	return nil
 }
 
-func (c *RequestContext) Form(key string) string {
-	c.ensureFormParsed()
-	return c.Req.Form.Get(key)
+func (c *RequestContext) Form(key string) (string, error) {
+	if err := c.ensureFormParsed(); err != nil {
+		return "", err
+	}
+	return c.Req.Form.Get(key), nil
 }
 
-func (c *RequestContext) PostForm(key string) string {
-	c.ensureFormParsed()
-	return c.Req.PostForm.Get(key)
+func (c *RequestContext) PostForm(key string) (string, error) {
+	if err := c.ensureFormParsed(); err != nil {
+		return "", err
+	}
+	return c.Req.PostForm.Get(key), nil
 }

@@ -28,7 +28,7 @@ type Lilium struct {
 func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 	log, err := logger.NewLogger(cfg.Logger)
 	if err != nil {
-		panic("Unable to instantiate logger")
+		panic(fmt.Sprintf("Unable to instantiate logger: %v", err))
 	}
 
 	app := &Lilium{
@@ -56,7 +56,7 @@ func New(cfg *config.LiliumConfig, ctx_ context.Context) *Lilium {
 	return app
 }
 
-const DEFUALT_LILIUM_CONFIG = "lilium.yaml"
+const DEFAULT_LILIUM_CONFIG = "lilium.yaml"
 
 func LoadLiliumConfig(path string) *config.LiliumConfig {
 	envCfg, _ := config.LoadEnv(path)
@@ -72,12 +72,12 @@ func LoadLiliumConfig(path string) *config.LiliumConfig {
 }
 
 func (app *Lilium) OnStart(task LiliumTask) {
+	app.Lock.Lock()
+	defer app.Lock.Unlock()
+
 	if app.isRunning {
 		panic("OnStart function can't be called once the lilium app is running.")
 	}
-
-	app.Lock.Lock()
-	defer app.Lock.Unlock()
 
 	app.onStartTasks = append(app.onStartTasks, task)
 }
@@ -97,8 +97,6 @@ func (app *Lilium) Start(router *Router) {
 	}
 
 	app.processCors(router.mux)
-	if app.Config.LogRoutes {
-	}
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", app.Config.Server.Port),

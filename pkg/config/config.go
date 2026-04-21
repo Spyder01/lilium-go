@@ -11,7 +11,7 @@ import (
 type CorsConfig struct {
 	Enabled          bool     `yaml:"enabled"`
 	Origins          []string `yaml:"origins"`
-	AllowedMetods    []string `yaml:"allowedMetods"`
+	AllowedMethods   []string `yaml:"allowedMethods"`
 	AllowedHeaders   []string `yaml:"allowedHeaders"`
 	ExposedHeaders   []string `yaml:"exposedHeaders"`
 	AllowCredentials bool     `yaml:"allowCredentials"`
